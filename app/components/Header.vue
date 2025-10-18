@@ -7,13 +7,14 @@
       <UPopover arrow>
         <UButton label="Iniciar sesión" variant="ghost" color="neutral" icon="i-lucide-user" />
         <template #content>
-          <div class="px-4 py-4 flex flex-col w-60">
+          <div class="px-4 py-4 flex flex-col w-60" v-if="!auth.user">
             <UInput
               color="neutral"
               variant="soft"
-              placeholder="Correo electrónico"
+              placeholder="Usuario"
               class="mb-2"
               size="lg"
+              v-model="username"
             />
             <UInput
               color="neutral"
@@ -21,8 +22,14 @@
               placeholder="Contraseña"
               class="mb-3"
               size="lg"
+              v-model="password"
             />
-            <UButton class="bg-rose-500 hover:bg-rose-600 active:bg-rose-400 text-white mb-1">
+            <UButton
+              class="bg-rose-500 hover:bg-rose-600 active:bg-rose-400 disabled:bg-rose-300 text-white mb-1"
+              @click="handleLogin"
+              :disabled="!username.trim() || !password.trim()"
+              :loading="auth.loading"
+            >
               <div class="w-full">Iniciar sesión</div>
             </UButton>
             <UButton color="neutral" variant="subtle" class="mb-4">
@@ -43,6 +50,20 @@
               <span class="text-rose-500 underline">Términos y condiciones</span>
               para registro de usuario
             </div>
+          </div>
+          <div class="px-4 py-4 flex flex-col w-60" v-else>
+            <div class="mb-4">
+              {{ auth.user }}
+            </div>
+            <UButton
+              color="neutral"
+              variant="subtle"
+              class="mb-4"
+              @click="handleLogout"
+              :loading="auth.loading"
+            >
+              <div class="w-full">Cerrar sesión</div>
+            </UButton>
           </div>
         </template>
       </UPopover>
@@ -65,4 +86,20 @@
   import AppStoreBadge from '~/assets/images/app-store-badge.svg'
   import PlayStoreBadge from '~/assets/images/play-store-badge.svg'
   import Google from '~/assets/images/google.svg'
+
+  const auth = useAuthStore()
+
+  const username = ref('amillan29')
+  const password = ref('Jr2774185!')
+
+  const handleLogin = async () => {
+    try {
+      await auth.signIn(username.value, password.value)
+      console.log('Logged in user:', auth.user)
+    } catch (err) {
+      console.error('Login failed:', auth.error)
+    }
+  }
+
+  const handleLogout = async () => auth.signOut()
 </script>

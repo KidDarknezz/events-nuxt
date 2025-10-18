@@ -18,3 +18,11 @@
     </UContainer> -->
   </div>
 </template>
+
+<script lang="ts" setup>
+  const auth = useAuthStore()
+
+  onMounted(() => {
+    auth.fetchCurrentUser()
+  })
+</script>

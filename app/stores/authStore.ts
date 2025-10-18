@@ -1,16 +1,60 @@
-// stores/counter.ts
 import { defineStore } from 'pinia'
 
+interface AuthState {
+  user: any
+  username: string
+  loading: boolean
+  error: string | null
+}
+
 export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    count: 0
+  state: (): AuthState => ({
+    user: null,
+    username: '',
+    loading: false,
+    error: ''
   }),
   actions: {
-    increment() {
-      this.count++
+    async signIn(uname: string, password: string) {
+      this.loading = true
+      this.error = null
+      try {
+        const { signIn: amplifySignIn } = await import('aws-amplify/auth')
+        const res = await amplifySignIn({ username: uname, password })
+        this.user = res
+        this.username = uname
+        return res
+      } catch (err: any) {
+        this.error = err.message || 'Login failed'
+        throw err
+      } finally {
+        this.loading = false
+      }
     },
-    reset() {
-      this.count = 0
+
+    async signOut() {
+      this.loading = true
+      try {
+        const { signOut: amplifySignOut } = await import('aws-amplify/auth')
+        await amplifySignOut()
+        this.user = null
+      } catch (err: any) {
+        this.error = err.message || 'Logout failed'
+        throw err
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async fetchCurrentUser() {
+      try {
+        const { getCurrentUser: getCurrentUser } = await import('aws-amplify/auth')
+        const res = await getCurrentUser()
+        this.user = res
+        return res
+      } catch {
+        this.user = null
+      }
     }
   }
 })

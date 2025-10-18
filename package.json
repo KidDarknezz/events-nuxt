@@ -10,9 +10,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^4.3.5",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "^4.0.1",
     "@pinia/nuxt": "^0.11.2",
+    "aws-amplify": "^6.15.7",
+    "axios": "^1.12.2",
     "nuxt": "^4.1.3",
     "pinia": "^3.0.3",
     "typescript": "^5.9.3",
