@@ -83,9 +83,9 @@
 </template>
 
 <script lang="ts" setup>
-  import AppStoreBadge from '~/assets/images/app-store-badge.svg'
-  import PlayStoreBadge from '~/assets/images/play-store-badge.svg'
-  import Google from '~/assets/images/google.svg'
+  import AppStoreBadge from '@/assets/images/app-store-badge.svg'
+  import PlayStoreBadge from '@/assets/images/play-store-badge.svg'
+  import Google from '@/assets/images/google.svg'
 
   const auth = useAuthStore()
 

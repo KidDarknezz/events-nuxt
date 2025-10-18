@@ -1,6 +1,8 @@
 import axios, { type AxiosResponse } from 'axios'
 
-const url = 'http://localhost:3001'
+let url = ''
+
+if (import.meta.env.DEV) url = 'http://localhost:3001'
 
 export function useApi<T = any>() {
   const getAllEvents = async (): Promise<T | null> => {
