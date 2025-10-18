@@ -24,5 +24,20 @@
 
   onMounted(() => {
     auth.fetchCurrentUser()
+
+    // Signature
+    if (import.meta.env.PROD) {
+      console.info('%c👋 Lead Developer', 'font-weight: bold; font-size: 16px; color: #0B5FFF;')
+      console.info(
+        '%cName:%c Alejandro Millan',
+        'font-weight: bold; color: #555555;',
+        'font-weight: normal; color: #1ABC9C;'
+      )
+      console.info(
+        '%cEmail:%c amilland29@gmail.com',
+        'font-weight: bold; color: #555555;',
+        'font-weight: normal; color: #1ABC9C;'
+      )
+    }
   })
 </script>

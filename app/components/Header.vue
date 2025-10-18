@@ -5,7 +5,7 @@
     </template>
     <template #right>
       <UPopover arrow>
-        <UButton label="Iniciar sesión" variant="ghost" color="neutral" icon="i-lucide-user" />
+        <UButton :label="authBtnLabel" variant="ghost" color="neutral" icon="i-lucide-user" />
         <template #content>
           <div class="px-4 py-4 flex flex-col w-60" v-if="!auth.user">
             <UInput
@@ -102,4 +102,6 @@
   }
 
   const handleLogout = async () => auth.signOut()
+
+  const authBtnLabel = computed(() => (auth.user ? 'Mi cuenta' : 'Iniciar sesión'))
 </script>

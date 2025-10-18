@@ -26,5 +26,9 @@
   import PlayStoreBadge from '~/assets/images/play-store-badge.svg'
   import Hero from '~/assets/images/hero.png'
 
-  const auth = useAuthStore()
+  const events = useEventsStore()
+
+  onMounted(() => {
+    events.getAllEvents()
+  })
 </script>
