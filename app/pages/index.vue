@@ -31,9 +31,15 @@
     <div class="text-center mb-8">Compra tus entradas AQUÍ</div>
     <div class="grid grid-cols-12 gap-4">
       <div class="lg:col-span-3 md:col-span-4 col-span-6" v-for="event in allEvents">
-        <NuxtImg :src="event.flyer" class="mb-4 rounded-2xl cursor-pointer" />
-        <div class="font-semibold text-sm cursor-pointer">{{ event.name }}</div>
-        <div class="text-xs">{{ event.date_time }}</div>
+        <NuxtImg
+          :src="event.flyer"
+          class="mb-4 rounded-2xl cursor-pointer"
+          @click="navivateToEvent(event.id)"
+        />
+        <div class="font-semibold text-sm cursor-pointer" @click="navivateToEvent(event.id)">
+          {{ event.name }}
+        </div>
+        <div class="text-xs">{{ event.dateTime }}</div>
       </div>
     </div>
   </UContainer>
@@ -46,6 +52,9 @@
   import Hero from '@/assets/images/hero.png'
 
   const events = useEventsStore()
+  const router = useRouter()
+
+  const navivateToEvent = (id: number) => router.push(`/event/${id}`)
 
   const allEvents = computed(() => events.events)
 
