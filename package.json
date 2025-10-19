@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "start": "nuxt start"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
   },
   "dependencies": {
     "@aws-amplify/ui-vue": "^4.3.5",
