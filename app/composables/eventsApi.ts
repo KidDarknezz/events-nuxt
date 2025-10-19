@@ -1,10 +1,10 @@
 import axios, { type AxiosResponse } from 'axios'
 import type { EventData } from '~/types/EventData.type'
 
-let url = ''
+let url = 'http://events-express-back.eba-jhkq3m2x.us-east-2.elasticbeanstalk.com'
 const route = '/events'
 
-if (import.meta.env.DEV) url = 'http://localhost:3001'
+// if (import.meta.env.DEV) url = 'http://localhost:3001'
 
 export function useApi<T = any>() {
   const getAllEvents = async (): Promise<EventData[]> => {
