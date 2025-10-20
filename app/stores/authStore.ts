@@ -23,6 +23,7 @@ export const useAuthStore = defineStore('auth', {
         const res = await amplifySignIn({ username: uname, password })
         this.user = res
         this.username = uname
+        if (res.nextStep.signInStep === 'DONE') this.fetchCurrentUser()
         return res
       } catch (err: any) {
         this.error = err.message || 'Login failed'
