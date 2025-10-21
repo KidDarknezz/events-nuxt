@@ -83,15 +83,25 @@
 </template>
 
 <script lang="ts" setup>
+  // VUE
+  import { ref, computed } from 'vue'
+
+  // STORES
+  import { useAuthStore } from '@/stores/authStore'
+
+  // IMAGES
   import AppStoreBadge from '@/assets/images/app-store-badge.svg'
   import PlayStoreBadge from '@/assets/images/play-store-badge.svg'
   import Google from '@/assets/images/google.svg'
 
+  // USE STORES
   const auth = useAuthStore()
 
+  // REFS
   const username = ref('amillan29')
   const password = ref('Jr2774185!')
 
+  // METHODS
   const handleLogin = async () => {
     try {
       await auth.signIn(username.value, password.value)
@@ -103,5 +113,6 @@
 
   const handleLogout = async () => auth.signOut()
 
+  // COMPUTED
   const authBtnLabel = computed(() => (auth.user ? 'Mi cuenta' : 'Iniciar sesión'))
 </script>
