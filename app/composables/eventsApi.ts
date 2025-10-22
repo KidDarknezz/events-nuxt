@@ -1,7 +1,7 @@
 import axios, { type AxiosResponse } from 'axios'
 import type { EventData } from '~/types/EventData.type'
 
-let url = 'http://events-express-back.eba-jhkq3m2x.us-east-2.elasticbeanstalk.com'
+let url = 'https://izrt4185o1.execute-api.us-east-2.amazonaws.com/default'
 const route = '/events'
 
 if (import.meta.env.DEV) url = 'http://localhost:3001'
